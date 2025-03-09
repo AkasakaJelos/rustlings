@@ -1,3 +1,5 @@
+cargo-features = ["edition2024"]
+
 [workspace]
 resolver = "2"
 exclude = [
@@ -89,3 +91,5 @@ needless_option_as_deref = "allow"
 
 [lints]
 workspace = true
+
+

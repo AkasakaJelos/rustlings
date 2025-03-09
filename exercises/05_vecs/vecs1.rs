@@ -5,7 +5,8 @@ fn array_and_vec() -> ([i32; 4], Vec<i32>) {
     // Use the vector macro.
     // let v = ???;
 
-    (a, v)
+    let v = a.to_vec();
+    (a,v)
 }
 
 fn main() {

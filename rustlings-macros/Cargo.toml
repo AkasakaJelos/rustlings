@@ -1,3 +1,6 @@
+cargo-features = ["edition2024"]
+
+
 [package]
 name = "rustlings-macros"
 description = "A macros crate intended to be used only by Rustlings"
