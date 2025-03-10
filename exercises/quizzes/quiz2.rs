@@ -26,6 +26,16 @@ enum Command {
 mod my_module {
     use super::Command;
 
+
+    pub fn transformer(input: Command) -> String{
+        match input{
+            Command::Uppercase => input.to_uppercase(), 
+            Command::Trim => input.to_string().trim(), 
+            Command::Append(s) => input.push_str(s),
+
+        }
+    }
+
     // TODO: Complete the function as described above.
     // pub fn transformer(input: ???) -> ??? { ??? }
 }
@@ -39,6 +49,7 @@ mod tests {
     // TODO: What do we need to import to have `transformer` in scope?
     // use ???;
     use super::Command;
+    use my_module::transformer; 
 
     #[test]
     fn it_works() {
