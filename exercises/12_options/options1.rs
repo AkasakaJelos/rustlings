@@ -4,11 +4,18 @@
 // `hour_of_day` is higher than 23.
 fn maybe_icecream(hour_of_day: u16) -> Option<u16> {
     // TODO: Complete the function body.
+/*     if hour_of_day < 22{
+        Some(5)
+    }else if (22..=23).contains(&hour_of_day){
+        Some(0)
+    }
+    else{
+        None
+    } */
     match hour_of_day{
-        Some(22) => 0, 
-        Some(23) => 0, 
-        _ => 5,
-
+        0..=21 => Some(5), 
+        22..=23 => Some(0), 
+        _ => None, 
     }
 }
 
@@ -24,7 +31,7 @@ mod tests {
     fn raw_value() {
         // TODO: Fix this test. How do you get the value contained in the
         // Option?
-        let icecreams = maybe_icecream(12);
+        let icecreams = maybe_icecream(12).unwrap();
 
         assert_eq!(icecreams, 5); // Don't change this line.
     }
