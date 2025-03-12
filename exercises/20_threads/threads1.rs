@@ -24,6 +24,15 @@ fn main() {
     for handle in handles {
         // TODO: Collect the results of all threads into the `results` vector.
         // Use the `JoinHandle` struct which is returned by `thread::spawn`.
+        let results = thread::spawn(|| {
+            for i in 1..10 {
+                println!("hi number {i} from the spawned thread!");
+                thread::sleep(Duration::from_millis(1));
+            }
+        });
+    }
+
+        
     }
 
     if results.len() != 10 {

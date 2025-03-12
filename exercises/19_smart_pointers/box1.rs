@@ -12,18 +12,22 @@
 // TODO: Use a `Box` in the enum definition to make the code compile.
 #[derive(PartialEq, Debug)]
 enum List {
-    Cons(i32, List),
+    Cons(i32, Box<List>),
     Nil,
 }
 
 // TODO: Create an empty cons list.
 fn create_empty_list() -> List {
-    todo!()
+    use crate::List::Nil; 
+    Nil
 }
 
 // TODO: Create a non-empty cons list.
 fn create_non_empty_list() -> List {
-    todo!()
+    use crate::List::Cons; 
+    use crate::List::Nil;
+
+    Cons(42, Box::new(Cons (69, Box::new(Nil))))
 }
 
 fn main() {
