@@ -22,20 +22,41 @@ enum IntoColorError {
     // Integer conversion error
     IntConversion,
 }
-
 // TODO: Tuple implementation.
 // Correct RGB color values must be integers in the 0..=255 range.
 impl TryFrom<(i16, i16, i16)> for Color {
     type Error = IntoColorError;
 
-    fn try_from(tuple: (i16, i16, i16)) -> Result<Self, Self::Error> {}
+    fn try_from(tuple: (i16, i16, i16)) -> Result<Self, Self::Error> {
+        let (a,b,c) = tuple; 
+        if !(0..=255).contains(&a) ||!(0..=255).contains(&b) || !(0..=255).contains(&c){
+            return Err(Self::Error::IntConversion);
+        } else{
+            Ok(Self{
+                red: a as u8, 
+                green: b as u8, 
+                blue: c as u8, 
+            })
+        }
+    }
 }
 
 // TODO: Array implementation.
 impl TryFrom<[i16; 3]> for Color {
     type Error = IntoColorError;
 
-    fn try_from(arr: [i16; 3]) -> Result<Self, Self::Error> {}
+    fn try_from(arr: [i16; 3]) -> Result<Self, Self::Error> {
+        let (a,b,c) = (arr[0], arr[1], arr[2]);
+        if !(0..=255).contains(&a) ||!(0..=255).contains(&b) || !(0..=255).contains(&c){
+            return Err(Self::Error::IntConversion);
+        } else{
+            Ok(Self{
+                red: a as u8, 
+                green: b as u8, 
+                blue: c as u8, 
+            })
+        }
+    }
 }
 
 // TODO: Slice implementation.
@@ -43,7 +64,25 @@ impl TryFrom<[i16; 3]> for Color {
 impl TryFrom<&[i16]> for Color {
     type Error = IntoColorError;
 
-    fn try_from(slice: &[i16]) -> Result<Self, Self::Error> {}
+    fn try_from(slice: &[i16]) -> Result<Self, Self::Error> {
+        if slice.len() != 3{
+            return Err(Self::Error::BadLen);
+        }; 
+        let mut slice_iter = slice.iter();
+        let (Some(a),Some(b),Some(c)) = (slice_iter.next(), slice_iter.next(), slice_iter.next()) else{
+            return Err(Self::Error::IntConversion);
+        }; 
+        if !(0..=255).contains(a) ||!(0..=255).contains(b) || !(0..=255).contains(c){
+            Err(Self::Error::IntConversion)
+        } else{
+            Ok(Self{
+                red: *a as u8, 
+                green: *b as u8, 
+                blue: *c as u8, 
+            })
+        }
+
+    }
 }
 
 fn main() {
